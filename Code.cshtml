@@ -1,0 +1,26 @@
+@inherits AppCode.Razor.AppRazor
+
+@using AppCode.Data
+
+@{ var data = As<SourceCode>(MyItem); }
+
+<div @Kit.Toolbar.Default(MyItem)>
+<h1>@data.Title</h1>
+  <div id="container" style="width: 100%; height: 500px;"></div>
+
+  <!-- OR ANY OTHER AMD LOADER HERE INSTEAD OF loader.js -->
+  <script src="@App.Folder.Url/node_modules/monaco-editor/min/vs/loader.js"></script>
+  <script>
+    require.config({
+      paths: { vs: "@App.Folder.Url/node_modules/monaco-editor/min/vs" },
+    });
+
+    require(["vs/editor/editor.main"], function () {
+      var editor = monaco.editor.create(document.getElementById("container"), {
+        value: ["@data.Code"].join("\n"),
+        language: "@data.Language",
+      });
+    });
+
+  </script>
+</div>
