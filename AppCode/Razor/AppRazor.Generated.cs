@@ -4,7 +4,7 @@
 // Generator:   RazorViewsGenerator v18.00.01
 // App/Edition: SourceCode/
 // User:        2sic Web-Developer
-// When:        2024-09-09 16:05:02Z
+// When:        2024-09-11 08:15:32Z
 
 using AppCode.Data;
 using ToSic.Sxc.Apps;

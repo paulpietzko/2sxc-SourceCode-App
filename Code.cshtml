@@ -17,10 +17,22 @@
 
     require(["vs/editor/editor.main"], function () {
       var editor = monaco.editor.create(document.getElementById("container"), {
-        value: ["@data.Code"].join("\n"),
-        language: "@data.Language",
+        value: `@Html.Raw(data.Code)`,
+        language: `@data.Language`,
+        automaticLayout: true,
+        theme: `@data.Theme`,
+        lineNumbers: `@data.LineNumbers`,
+        fontSize: `@data.FontSize`,       
+        readOnly: `@data.ReadOnly`,
+         minimap: {
+            enabled: `@data.Minimap`,
+          },
       });
     });
 
   </script>
+
+@* TODO: Outsource JS logic *@
+@* TODO: Bools don't have effects (they are set correctly) *@
+
 </div>
