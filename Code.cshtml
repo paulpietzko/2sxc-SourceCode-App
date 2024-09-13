@@ -2,13 +2,14 @@
 
 @using AppCode.Data
 
-@{ var data = As<SourceCode>(MyItem); }
+@{
+  var data = As<SourceCode>(MyItem);
+}
 
 <div @Kit.Toolbar.Default(MyItem)>
-<h1>@data.Title</h1>
+  <h1>@data.Title</h1>
   <div id="container" style="width: 100%; height: 500px;"></div>
 
-  <!-- OR ANY OTHER AMD LOADER HERE INSTEAD OF loader.js -->
   <script src="@App.Folder.Url/node_modules/monaco-editor/min/vs/loader.js"></script>
   <script>
     require.config({
@@ -21,18 +22,17 @@
         language: `@data.Language`,
         automaticLayout: true,
         theme: `@data.Theme`,
-        lineNumbers: `@data.LineNumbers`,
-        fontSize: `@data.FontSize`,       
-        readOnly: `@data.ReadOnly`,
-         minimap: {
-            enabled: `@data.Minimap`,
-          },
+        lineNumbers: `@data.LineNumbers` == "True",
+        fontSize: @data.FontSize,
+        readOnly: `@data.ReadOnly` == "True",
+        minimap: {
+          enabled: `@data.Minimap` == "True",
+        },
       });
     });
 
   </script>
 
-@* TODO: Outsource JS logic *@
-@* TODO: Bools don't have effects (they are set correctly) *@
+  @* TODO: Outsource JS logic *@
 
 </div>
