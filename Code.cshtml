@@ -4,6 +4,7 @@
 
 @{
   var data = As<SourceCode>(MyItem);
+  var containerHeight = data.Height + "px";
 }
 
 <div @Kit.Toolbar.Default(MyItem)>
@@ -24,3 +25,11 @@
     }
   )
 </div>
+
+<style>
+  #container {
+    width: 100%;
+    height: @containerHeight;
+    border: 1px solid #ccc;
+  }
+</style>
