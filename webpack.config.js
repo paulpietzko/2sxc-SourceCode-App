@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = (env) => {
   return {
@@ -30,60 +32,52 @@ module.exports = (env) => {
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.scss']
     },
+    module: {
+      rules: [
+        {
+          test: /\.ts$/,
+          use: 'ts-loader',
+          exclude: /node_modules\/(?!monaco-editor)/,
+        },
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader'
+          ],
+          include: /node_modules/,
+        },
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader'
+          ],
+          include: /node_modules/
+        },
+      ]
+    },
     plugins: [
       new FixStyleOnlyEntriesPlugin(),
       new MiniCssExtractPlugin({
         filename: '[name].min.css',
       }),
       new webpack.ProgressPlugin(),
+      new MonacoWebpackPlugin({
+        languages: ['javascript', 'typescript'],
+      }),
     ],
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          use: [
-            {
-              loader: 'ts-loader',
-              options: {
-                transpileOnly: true,
-              },
-            },
-          ],
-          exclude: /node_modules/,
-        }, {
-          test: /\.s[ac]ss$/i,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: true
-              },
-            }, {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                postcssOptions: {
-                  plugins: function () {
-                    return [
-                      require('autoprefixer')
-                    ];
-                  }
-                }
-              }
-            }, {
-              loader: "sass-loader",
-              options: {
-                sourceMap: true
-              },
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true
             }
-          ],
-        }
-      ],
-    },
-  }
+          }
+        })
+      ]
+    }
+  };
 };
-
-new webpack.ProgressPlugin((percentage, message) => {
-  console.log(`${(percentage * 100).toFixed()}% ${message}`);
-})
