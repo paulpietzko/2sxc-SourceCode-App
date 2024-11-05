@@ -1,8 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = (env) => {
@@ -37,46 +35,45 @@ module.exports = (env) => {
         {
           test: /\.ts$/,
           use: 'ts-loader',
-          exclude: /node_modules\/(?!monaco-editor)/,
+          exclude: /node_modules\/(?!monaco-editor)/
         },
         {
           test: /\.css$/,
           use: [
             MiniCssExtractPlugin.loader,
             'css-loader'
-          ],
-          include: /node_modules/,
+          ]
         },
         {
-          test: /\.css$/,
+          test: /\.scss$/,
           use: [
             MiniCssExtractPlugin.loader,
-            'css-loader'
-          ],
-          include: /node_modules/
-        },
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                sassOptions: {
+                  includePaths: ['node_modules']
+                }
+              }
+            }
+          ]
+        }
       ]
     },
     plugins: [
-      new FixStyleOnlyEntriesPlugin(),
       new MiniCssExtractPlugin({
-        filename: '[name].min.css',
+        filename: '[name].min.css'
       }),
-      new webpack.ProgressPlugin(),
       new MonacoWebpackPlugin({
-        languages: ['javascript', 'typescript'],
-      }),
+        languages: ['typescript', 'javascript']
+      })
     ],
-    optimization: {
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true
-            }
-          }
-        })
+    resolve: {
+      extensions: ['.ts', '.js', '.css', '.scss'],
+      modules: [
+        path.resolve(__dirname, 'node_modules'),
+        'node_modules'
       ]
     }
   };

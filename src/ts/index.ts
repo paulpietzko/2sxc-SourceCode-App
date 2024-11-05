@@ -1,7 +1,6 @@
-import 'monaco-editor/esm/vs/editor/editor.main.css';
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import '../styles/styles.scss';
 import 'monaco-editor/min/vs/editor/editor.main.css';
+import * as monaco from 'monaco-editor';
+import "../styles/styles.scss";
 
 window.MonacoEnvironment = {
   getWorkerUrl: function (_moduleId: any, label: string) {
