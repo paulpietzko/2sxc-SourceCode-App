@@ -13,4 +13,26 @@
   
   <script src="@App.Folder.Url/dist/scripts.min.js"></script>
   
+
+  @* @Kit.Page.TurnOn("window.appContent.activeGoogleMaps()", data: new
+    {
+      apiKey = MapsApiKey,
+      domId = GoogleMapsDomId,
+      icon = AllSettings.String("GoogleMaps.MarkerIcon") ?? "",
+      lat = MyLocation.GpsCoordinates.Latitude,
+      lng = MyLocation.GpsCoordinates.Longitude,
+      zoom = AllSettings.Int("GoogleMaps.Zoom"),
+      info = MyLocation.Company,
+    }) *@
+
+    @Kit.Page.TurnOn("window.appSourceCode.activeMonacoEditor()", data: new {
+        value = data.Code,
+        language = data.Language,
+        automaticLayout = true,
+        theme = data.Theme,
+        lineNumbers = data.LineNumbers,
+        fontSize = data.FontSize,
+        readOnly = data.ReadOnly
+      }
+    )
 </div>
