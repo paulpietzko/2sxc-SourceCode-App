@@ -6,6 +6,16 @@ const winAny = window as any;
 winAny.appSourceCode ??= {};
 winAny.appSourceCode.activeMonacoEditor ??= activeMonacoEditor;
 
+interface EditorOptions {
+  value: string;
+  language: string;
+  automaticLayout: string;
+  theme: string;
+  lineNumbers: string;
+  fontSize: string;
+  readOnly: string;
+}
+
 function activeMonacoEditor({
   value,
   language,
@@ -14,7 +24,7 @@ function activeMonacoEditor({
   lineNumbers,
   fontSize,
   readOnly,
-}: any) {
+}: EditorOptions) {
   const container = document.getElementById('container');
 
   if (container) {
