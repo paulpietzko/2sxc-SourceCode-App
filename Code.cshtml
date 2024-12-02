@@ -21,11 +21,11 @@
       language = data.Language,
       automaticLayout = true,
       theme = data.Theme,
-      @* lineNumbers = data.LineNumbers == "True" ? true : false, *@
+      lineNumbers = data.LineNumbers ? "on" : "off",
       fontSize = data.FontSize,
-      @* readOnly = data.ReadOnly == "True" ? true : false, *@
+      readOnly = data.ReadOnly,
       minimap = new {
-        @* enabled: data.Minimap == "True" ? true : false *@
+        enabled = data.Minimap
       }
     }
   )
