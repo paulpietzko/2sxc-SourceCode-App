@@ -10,7 +10,8 @@
   <h1>@data.Title</h1>
   <div id="container" style="width: 100%; height: 500px;" />
 
-  <script src="@App.Folder.Url/dist/scripts.min.js"></script>
+  <script src="@App.Folder.Url/dist/scripts.js"></script>
+  <link href="@App.Folder.Url/dist/styles.min.css" rel="stylesheet">
   
   @Kit.Page.TurnOn("window.appSourceCode.activeMonacoEditor()", data: new {
       value = data.Code,

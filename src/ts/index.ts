@@ -1,20 +1,9 @@
-import 'monaco-editor/min/vs/editor/editor.main.css';
+// import 'monaco-editor/min/vs/editor/editor.main.css';
 import * as monaco from 'monaco-editor';
-import '../styles/styles.scss';
 
 const winAny = window as any;
 winAny.appSourceCode ??= {};
 winAny.appSourceCode.activeMonacoEditor ??= activeMonacoEditor;
-
-interface EditorOptions {
-  value: string;
-  language: string;
-  automaticLayout: string;
-  theme: string;
-  lineNumbers: string;
-  fontSize: string;
-  readOnly: string;
-}
 
 function activeMonacoEditor({
   value,
@@ -24,7 +13,7 @@ function activeMonacoEditor({
   lineNumbers,
   fontSize,
   readOnly,
-}: EditorOptions) {
+}: any) {
   const container = document.getElementById('container');
 
   if (container) {
@@ -34,7 +23,7 @@ function activeMonacoEditor({
       theme: theme,
       automaticLayout: automaticLayout === 'True',
       fontSize: parseInt(fontSize, 10),
-      lineNumbers: lineNumbers === 'True' ? 'on' : 'off',
+      lineNumbers: 'on',
       minimap: { enabled: true },
       scrollBeyondLastLine: false,
       roundedSelection: false,

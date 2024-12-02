@@ -5,15 +5,15 @@ const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 module.exports = {
   entry: {
     styles: "./src/styles/styles.scss",
-    scripts: "./src/ts/index.ts",
+    scripts: "./src/ts/index.ts" 
   },
   output: {
+    globalObject: 'self',
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].min.js",
-    // publicPath: "/sourcecode/dist/",
+    filename: "[name].js",
   },
-  mode: "production",
-  devtool: "source-map",
+  mode: "development",
+  // devtool: "source-map",
   module: {
     rules: [
       {
@@ -44,15 +44,11 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".js", ".css", ".scss"],
-    modules: [path.resolve(__dirname, "node_modules"), "node_modules"],
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "[name].min.css",
     }),
-    new MonacoWebpackPlugin({
-      languages: ["typescript", "javascript"],
-      filename: "workers/[name].worker.js",
-    }),
+    new MonacoWebpackPlugin(),
   ],
 };

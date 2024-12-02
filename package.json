@@ -4,7 +4,9 @@
   "description": "",
   "main": "(none)",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch --config webpack.config.js"
+
   },
   "author": "2sic internet solutions 2024",
   "license": "ISC",
