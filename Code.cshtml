@@ -4,23 +4,29 @@
 
 @{
   var data = As<SourceCode>(MyItem);
+  var height = "height: " + (data.Height != 0 ? data.Height + "px;" : "300px;");
 }
 
 <div @Kit.Toolbar.Default(MyItem)>
   <h1>@data.Title</h1>
-  <div id="container" style="width: 100%; height: 500px;" />
+  @* make height work *@
+  <div id="container" style="width: 100%; @height"></div> 
 
   <script src="@App.Folder.Url/dist/scripts.js"></script>
   <link href="@App.Folder.Url/dist/styles.min.css" rel="stylesheet">
   
-  @Kit.Page.TurnOn("window.appSourceCode.activeMonacoEditor()", data: new {
+  @Kit.Page.TurnOn("window.appSourceCode.activeMonacoEditor()",
+    data: new {
       value = data.Code,
       language = data.Language,
       automaticLayout = true,
       theme = data.Theme,
-      lineNumbers = data.LineNumbers,
+      @* lineNumbers = data.LineNumbers == "True" ? true : false, *@
       fontSize = data.FontSize,
-      readOnly = data.ReadOnly
+      @* readOnly = data.ReadOnly == "True" ? true : false, *@
+      minimap = new {
+        @* enabled: data.Minimap == "True" ? true : false *@
+      }
     }
   )
 </div>
