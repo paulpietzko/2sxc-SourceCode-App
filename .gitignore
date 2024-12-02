@@ -1,8 +1,4 @@
-# folders from .net which you don't want in your git repo
-obj
-bin
-
-# folders from node which you don't want in your git repo
+sh.exe.stackdump
 node_modules
 
 # folders from visual studio which you don't want in your git repo
