@@ -13,21 +13,22 @@ function activeMonacoEditor({
   lineNumbers,
   fontSize,
   readOnly,
+  minimap,
 }: any) {
   const container = document.getElementById('container');
-
+  
   if (container) {
     monaco.editor.create(container, {
       value: value,
       language: language,
       theme: theme,
-      automaticLayout: automaticLayout === 'True',
+      automaticLayout: automaticLayout,
       fontSize: parseInt(fontSize, 10),
-      lineNumbers: 'on',
-      minimap: { enabled: true },
+      lineNumbers: lineNumbers,
+      minimap: { enabled: minimap },
       scrollBeyondLastLine: false,
       roundedSelection: false,
-      readOnly: readOnly === 'True',
+      readOnly: readOnly,
       cursorStyle: 'line',
     });
   } else {
