@@ -1,8 +1,6 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
-const TerserPlugin = require('terser-webpack-plugin');
- 
+
 module.exports = {
   entry: {
     styles: "./src/styles/styles.scss",
@@ -13,21 +11,11 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
   },
-  mode: "production",
-  // devtool: "source-map",
-  optimization: {
-    minimize: true, // Ensure minification is enabled
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          format: {
-            comments: false, // Removes all comments
-          },
-        },
-        extractComments: false, // Disables .LICENSE.txt file generation
-      }),
-    ],
+  externals: {
+    'monaco-editor': 'monaco',
+    'requirejs': 'requirejs',
   },
+  mode: "development",
   module: {
     rules: [
       {
@@ -63,6 +51,5 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].min.css",
     }),
-    new MonacoWebpackPlugin(),
   ],
 };

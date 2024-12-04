@@ -6,12 +6,12 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch --config webpack.config.js"
-
   },
   "author": "2sic internet solutions 2024",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.9.0",
+    "@types/requirejs": "^2.1.37",
     "@types/webpack": "^5.28.5",
     "@types/webpack-env": "^1.18.5",
     "autoprefixer": "^10.4.19",
@@ -32,5 +32,8 @@
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-fix-style-only-entries": "^0.6.1"
+  },
+  "dependencies": {
+    "requirejs": "^2.3.7"
   }
 }
