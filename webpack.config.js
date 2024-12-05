@@ -4,15 +4,15 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: {
     styles: "./src/styles/styles.scss",
-    scripts: "./src/ts/index.ts" 
+    scripts: "./src/ts/index.ts",
   },
   output: {
-    globalObject: 'self',
+    globalObject: "self",
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
   },
   externals: {
-    'monaco-editor': 'monaco',
+    "monaco-editor": "monaco",
     'requirejs': 'requirejs',
   },
   mode: "development",

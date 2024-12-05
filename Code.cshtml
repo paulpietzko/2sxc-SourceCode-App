@@ -1,5 +1,4 @@
 @inherits AppCode.Razor.AppRazor
-
 @using AppCode.Data
 
 @{
@@ -11,21 +10,20 @@
   <h1>@data.Title</h1>
   <div id="container" style="width: 100%; @height"></div>
 
-  @Kit.Page.TurnOn("window.appSourceCode.activeMonacoEditor()",
-    data: new {
-      value = data.Code,
-      language = data.Language,
-      automaticLayout = true,
-      theme = data.Theme,
-      lineNumbers = data.LineNumbers ? "on" : "off",
-      fontSize = data.FontSize,
-      readOnly = data.ReadOnly,
-      minimap = data.Minimap,
-    }
-  )
+  @Kit.Page.TurnOn(
+    "window.appSourceCode.initializeMonacoEditor()",
+      data: new {
+        value = data.Code,
+        language = data.Language,
+        automaticLayout = true,
+        theme = data.Theme,
+        lineNumbers = data.LineNumbers ? "on" : "off",
+        fontSize = data.FontSize,
+        readOnly = data.ReadOnly,
+        minimap = data.Minimap,
+      }
+    )
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-
-<script src="@App.Folder.Url/dist/scripts.js"></script>
+<script src="@App.Folder.Url/dist/scripts.js" @Kit.Page.AssetAttributes(position: "bottom")></script>
 <link href="@App.Folder.Url/dist/styles.min.css" rel="stylesheet">
